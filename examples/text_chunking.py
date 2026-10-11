@@ -22,15 +22,18 @@ def chunk_text(text: str, lang: str, max_sentences: int, overlap_percent: int | 
     Args:
         text: The raw document text to chunk.
         lang: ISO language code passed to the boundary detector.
-        max_sentences: Number of sentences per chunk.
+        max_sentences: Positive number of sentences per chunk.
         overlap_percent: Percentage of the window size to carry over
-            between consecutive chunks. Clamped so the stride never drops
-            below one sentence.
+            between consecutive chunks. Clamped between zero and one less
+            than the chunk size so every window advances by at least one sentence.
 
     Returns:
         A list of chunk strings. Each chunk is its sentences joined back
         together without added separators, so the original surrounding
         whitespace is preserved as-is.
+
+    Raises:
+        ValueError: If max_sentences is not positive.
 
     Examples:
         Integer and fractional percentages both produce whole-sentence overlap:
@@ -44,7 +47,25 @@ def chunk_text(text: str, lang: str, max_sentences: int, overlap_percent: int | 
         ['Alpha. Beta.', ' Gamma. Delta.']
         >>> chunk_text("", "en", max_sentences=2, overlap_percent=50.5)
         []
+        >>> chunk_text(text, "en", max_sentences=2, overlap_percent=-50)
+        ['Alpha. Beta.', ' Gamma. Delta.']
+        >>> chunk_text(text, "en", max_sentences=2, overlap_percent=100)
+        ['Alpha. Beta.', ' Beta. Gamma.', ' Gamma. Delta.']
+        >>> chunk_text(text, "en", max_sentences=2, overlap_percent=150)
+        ['Alpha. Beta.', ' Beta. Gamma.', ' Gamma. Delta.']
+        >>> chunk_text(text, "en", max_sentences=1, overlap_percent=150)
+        ['Alpha.', ' Beta.', ' Gamma.', ' Delta.']
+        >>> chunk_text(text, "en", max_sentences=0, overlap_percent=0)
+        Traceback (most recent call last):
+            ...
+        ValueError: max_sentences must be positive
+        >>> chunk_text("", "en", max_sentences=-1, overlap_percent=0)
+        Traceback (most recent call last):
+            ...
+        ValueError: max_sentences must be positive
     """
+    if max_sentences <= 0:
+        raise ValueError("max_sentences must be positive")
     if not text:
         return []
 
@@ -52,7 +73,7 @@ def chunk_text(text: str, lang: str, max_sentences: int, overlap_percent: int | 
     sentences = list(_detector.segment(text, preserve_whitespace=True))
 
     # Each sentence is a unit so we can apply a fixed size windows with overlap
-    overlap_num = int((max_sentences * overlap_percent) // 100)
+    overlap_num = max(0, min(max_sentences - 1, int((max_sentences * overlap_percent) // 100)))
     stride = max(1, max_sentences - overlap_num)
 
     chunks = [sentences[:max_sentences]]  # First chunk from start
