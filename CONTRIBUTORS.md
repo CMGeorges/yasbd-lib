@@ -13,6 +13,7 @@ A massive thank you to the open source community helping make `yasbd` more accur
 | **[@Chirudeva-Reddy](https://github.com/Chirudeva-Reddy)** | Burmese section markers, ၏ connector context, and discourse particle boundaries |
 | **[@cnaples79](https://github.com/cnaples79)** | Missing comma in set literals fix |
 | **[@CMGeorges](https://github.com/CMGeorges)** | Clamp overlap and validate window size in the RAG chunking example |
+| **[@CMGeorges](https://github.com/CMGeorges)** | Protect dataset-example source files from output-path collisions |
 | **[@ColumbusLabs](https://github.com/ColumbusLabs)** | Preserve word boundaries across StreamCleaner line breaks |
 | **[@ddelrio1986](https://github.com/ddelrio1986)** | Spelling and grammar fixes in docs |
 | **[@DYNOSuprovo](https://github.com/DYNOSuprovo)** | Swahili address + currency and German/Dutch unit abbreviations fix; Amharic quotative construction improvements; sentence modification example |
