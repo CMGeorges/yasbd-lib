@@ -54,6 +54,10 @@ git checkout -b feature/my-feature-branch
 git checkout -b bugfix/issue-number-description
 ```
 
+### Request Features via Issue First
+
+Feature work and other non-trivial enhancements must be proposed through a GitHub issue before opening a pull request. This keeps maintenance overhead low, aligns the work with the project's roadmap, and avoids spending review time on changes the maintainers may not accept. Include the problem, expected behavior, example inputs/outputs, and design constraints in the issue so the maintainers can assess the request efficiently.
+
 ### Add a New Language Module (Core Locked)
 
 The core language set is frozen for stable releases. New languages will only be added to the core library directly if the core maintainers judge it strictly necessary based on internal roadmap needs, bypassing the PR/issue intake pipeline entirely. For everyone else, language additions must be packaged externally.
@@ -152,10 +156,11 @@ A few rules keep the review queue running smoothly:
 
 - **Limit submission velocity:** A maximum of **5 pull requests per contributor per day** is allowed to prevent review queue exhaustion.
 - Keep no more than two pull requests open at once. If you are at the limit, merge one before opening the next. A pile of unmerged branches only gums up the queue and drags out reviews.
+- Feature work and substantial enhancements must start with a GitHub issue and receive maintainer sign-off before a PR is opened; do not raise a feature PR directly unless the issue has been explicitly approved.
 - A PR that has been reviewed and then sits unfixed for weeks may be closed or superseded. Review comments are a request for action, not a suggestion. If you cannot get back to it promptly, say so, and we will decide whether to close it or hand it to someone else.
 - If multiple pull requests address the same issue, we evaluate them based on code quality and test coverage. If the implementations are structurally identical, we merge the earliest submission.
 - Use the [PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md) when submitting.
-- Include a row for yourself in [CONTRIBUTORS.md](CONTRIBUTORS.md) in the same PR that contains your contribution: your GitHub handle and a short note on what you did. Already on the list? Update your existing row instead of adding a duplicate.
+- Include a row for yourself in [CONTRIBUTORS.md](CONTRIBUTORS.md) in the same PR that contains your contribution: your GitHub handle and a short note on what you did. Already on the list? Update your existing row instead of duplicating it.
 - Prefer extending existing test files and doctests over adding new test files. A new test file for a small change adds review overhead and fragments coverage; add cases to the tests that already cover the module instead.
 - Start PR branches from a clean `main`, not from a branch that carries changes from past edits or other PRs. A branch polluted with unrelated commits makes the diff noisy and hard to review.
 - When you add or edit a `CHANGELOG.md` entry, link to the pull request that ships the change, not the issue: use the `pull/NNN` URL. The issue may predate the fix; the PR number identifies the actual change that lands.
