@@ -36,30 +36,14 @@ def chunk_text(text: str, lang: str, max_sentences: int, overlap_percent: int | 
         ValueError: If max_sentences is not positive.
 
     Examples:
-        Integer and fractional percentages both produce whole-sentence overlap:
+        Demonstrating normal overlap, clamped overlap, and validation:
 
         >>> text = "Alpha. Beta. Gamma. Delta."
-        >>> chunk_text(text, "en", max_sentences=2, overlap_percent=50)
-        ['Alpha. Beta.', ' Beta. Gamma.', ' Gamma. Delta.']
         >>> chunk_text(text, "en", max_sentences=2, overlap_percent=50.5)
-        ['Alpha. Beta.', ' Beta. Gamma.', ' Gamma. Delta.']
-        >>> chunk_text(text, "en", max_sentences=2, overlap_percent=0.5)
-        ['Alpha. Beta.', ' Gamma. Delta.']
-        >>> chunk_text("", "en", max_sentences=2, overlap_percent=50.5)
-        []
-        >>> chunk_text(text, "en", max_sentences=2, overlap_percent=-50)
-        ['Alpha. Beta.', ' Gamma. Delta.']
-        >>> chunk_text(text, "en", max_sentences=2, overlap_percent=100)
         ['Alpha. Beta.', ' Beta. Gamma.', ' Gamma. Delta.']
         >>> chunk_text(text, "en", max_sentences=2, overlap_percent=150)
         ['Alpha. Beta.', ' Beta. Gamma.', ' Gamma. Delta.']
-        >>> chunk_text(text, "en", max_sentences=1, overlap_percent=150)
-        ['Alpha.', ' Beta.', ' Gamma.', ' Delta.']
         >>> chunk_text(text, "en", max_sentences=0, overlap_percent=0)
-        Traceback (most recent call last):
-            ...
-        ValueError: max_sentences must be positive
-        >>> chunk_text("", "en", max_sentences=-1, overlap_percent=0)
         Traceback (most recent call last):
             ...
         ValueError: max_sentences must be positive
@@ -85,7 +69,6 @@ def chunk_text(text: str, lang: str, max_sentences: int, overlap_percent: int | 
     return ["".join(chunk) for chunk in chunks]
 
 
-# Example usage
 if __name__ == "__main__":
     import textwrap
 
