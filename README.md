@@ -300,7 +300,7 @@ detector.lang = "es"
 > **Auto-detect**
 >
 > Pass `lang="auto"` if you want the system to figure out the language for you.
-> I wouldn't lean on it too hard though — it's a bit slower, and short phrases can throw it off sometimes.
+> I wouldn't lean on it too hard though, it's a bit slower, and short phrases can throw it off sometimes.
 >
 > Requires the `py3langid` package. Install it separately: `pip install py3langid`
 
@@ -397,9 +397,9 @@ print(res)
 
 ### Cleaner ([API](https://github.com/speedyk-005/yasbd-lib/blob/main/API_REFERENCES.md#yasbdutilscleaner))
 
-OCR'd a PDF, parsed a DOCX, or scraped noisy HTML? "StreamCleaner" normalizes text before it reaches the language detector or sentence segmenter.
+OCR'd a PDF, parsed a DOCX, or scraped noisy HTML? `StreamCleaner` normalizes text before it reaches the language detector or sentence segmenter.
 StreamCleaner accepts either a string or an open text stream and yields cleaned paragraphs lazily.
-You can pass a "StreamCleaner" instance directly to "detect()" or "segment()" to clean text as it is processed.
+You can pass a `StreamCleaner` instance directly to `detect()` or `segment()` to clean text as it is processed.
 
 ```python
 from yasbd.utils.cleaner import StreamCleaner
@@ -496,13 +496,7 @@ echo "Hello. World." | yasbd segment | cat
 # Hello.
 # World.
 
-# Load external language pack and segment a mono-profile pack
-pip install yasbd-union
-yasbd segment --from-pack yasbd_union --lang xx "Hello. World."
-# [1] 'Hello.'
-# [2] 'World.'
-
-# Multi-profile pack with explicit --lang
+# Load external  Multi-profile pack with explicit --lang
 pip install yasbd-auxlang
 yasbd segment --from-pack yasbd_auxlang --lang eo "Saluton. Kiel vi fartas?"
 # [1] 'Saluton.'
@@ -624,7 +618,7 @@ detector.segment("Saluton. Kiel vi fartas?")
 ```
 
 > [!CAUTION]
-> **Security**: `load_external_lang_packs()` imports arbitrary Python modules by name. Only load lang packs from sources you trust — an untrusted module can execute arbitrary code at import time.
+> **Security**: `load_external_lang_packs()` imports arbitrary Python modules by name. Only load lang packs from sources you trust; an untrusted module can execute arbitrary code at import time.
 
 Want to build a lang pack? Start with the [language template](https://github.com/speedyk-005/yasbd-lib/blob/main/src/yasbd/rules/_template.py).
 
@@ -634,6 +628,12 @@ Want to build a lang pack? Start with the [language template](https://github.com
 |---------|-----------|-------------|
 | [`yasbd-auxlang`](https://github.com/speedyk-005/yasbd-auxlang) | `eo`, `ia`, `ie`, `io` | Esperanto, Interlingua, Interlingue, Ido — constructed auxiliary languages |
 | [`yasbd-union`](https://github.com/speedyk-005/yasbd-union) | `xx` | Experimental multi-language profile for mixed-text segmentation without language constraints |
+
+### Other packs
+
+| Package | Languages | Description |
+|---------|-----------|-------------|
+| [yasbd-eu-packs](https://github.com/brunnojob/yasbd-eu-packs) | `lv` , `hu`, `hr`, `fi`, `sl` | External Latvian, Hungarian, Croatian, Finnish and Slovenian language profiles |
 
 ---
 
