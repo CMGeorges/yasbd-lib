@@ -1287,6 +1287,8 @@ To był test. A może nie? Zobaczymy :-)
 ```
 </details>
 
+| Rank | Library | N sents | Warm Time (ms) | The Verdict |
+| --- | --- | --- | --- | --- |
 | **1** | **yasbd** | 18 | 2.51 | **Flawless.** All abbreviations, quotes, ellipsis, and decimal commas preserved. Merges last paragraph into one clean block. |
 | **2** | **blingfire** | 17 | 0.08 | Fast but splits `inż.` from surname and `ul.` from street; merges the report list into one line. |
 | **3** | **nupunkt** | 19 | 0.68 | Splits `godz.`/`tj.`/`ul.` from values; quotes intact. Fast but over-aggressive. |
