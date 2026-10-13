@@ -343,6 +343,8 @@ def langs():
 
 def main():
     """CLI entry point. Handles --version, --help, and dispatches to radicli."""
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
     if len(sys.argv) > 1 and sys.argv[1] in ("--version", "-v"):
         print(_version())
         sys.exit(0)

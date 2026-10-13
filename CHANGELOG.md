@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),  
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+
+- **Windows CLI crash on redirected output** ([#395](https://github.com/speedyk-005/yasbd-lib/pull/395)): The CLI no longer raises `UnicodeEncodeError` on Windows (Python ≤ 3.14) when output is redirected or piped. `main()` now reconfigures stdout and stderr to UTF-8 before printing.
+
 ## [1.0.3] - 2026-10-10
 
 ### Changed

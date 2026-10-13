@@ -36,6 +36,7 @@ A massive thank you to the open source community helping make `yasbd` more accur
 | **[@PGrayCS](https://github.com/PGrayCS)** | Added MIT License to examples directory |
 | **[@raffaelemancuso](https://github.com/raffaelemancuso)** | Windows file handle leak fix in `_output` doctest |
 | **[@Rajesh270712](https://github.com/Rajesh270712)** | Base + English rule contributions |
+| **[@Rejoan2020](https://github.com/Rejoan2020)** | Fix the CLI crash on redirected output on Windows. |
 | **[@revanthajoe](https://github.com/revanthajoe)** | ASR/Transcript Segmentation Example |
 | **[@sairex53](https://github.com/sairex53)** | Directory-to-JSONL dataset example for UTF-8 text collections |
 | **[@sanmaxdev](https://github.com/sanmaxdev)** | Language tag normalization helper |
